@@ -1,0 +1,48 @@
+ALGORITHM analyze_sentence
+VAR
+    wordCount := INTEGER = 0;
+    charCount := INTEGER = 0;
+    vowelsCount := INTEGER = 0;
+    vowels := STRING = 'aeiouAEIOU';
+    char := STRING;
+    inWord := BOOLEAN = false;
+
+
+    
+BEGIN
+    const sentence_function = (sentence) => {
+    const chars = Array.From(sentence);
+
+    FOR EACH char IN sentence DO
+
+         IF (char = '.') THEN
+         //breaks out of loop
+            BREAK;
+        END_IF 
+
+        charCount := charCount + 1;
+
+        IF (char = ' ') THEN
+            IF (inWord) THEN
+                wordCount := wordCount + 1;
+                inWord := false;
+            END_IF
+        ELSE
+            inWord := true;
+        END_IF  
+
+        IF (vowels.includes(char)) THEN
+            vowelsCount := vowelsCount + 1;
+        END_IF
+        END_FOR
+        
+        IF (inWord) THEN
+            wordCount := wordCount + 1;
+        END_IF
+
+    WRITE("Number of characters: " + charCount);
+    WRITE("Number of words: " + wordCount);
+    WRITE("Number of vowels: " + vowelCount);
+
+    }
+END
